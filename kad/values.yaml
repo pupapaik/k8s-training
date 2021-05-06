@@ -1,0 +1,9 @@
+image: tomkukral/kad
+cluster: unknown
+replicas: 2
+
+rbac:
+  enabled: false
+
+prometheus:
+  enabled: true
