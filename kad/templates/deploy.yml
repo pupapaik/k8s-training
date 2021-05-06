@@ -73,3 +73,24 @@ spec:
         image: redis
         ports:
         - containerPort: 6379
+{{ if .Values.persistent.enabled }}
+        volumeMounts:
+          - mountPath: /data
+            name: data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: redis-data
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: redis-data
+spec:
+  storageClassName: {{ .Values.storageClassName }}
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+{{ end }}
