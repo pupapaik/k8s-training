@@ -2318,11 +2318,7 @@ apiVersion: v1
 data:
   repositories: |
     - type: git
-      url: https://github.com/tomkukral/kubernetes-examples
-    - type: git
-      url: https://gitlab.com/6shore.net/kad.git
-    - type: git
-      url: https://gitlab.com/tomkukral/training-model.git
+      url: https://github.com/pupapaik/k8s-training.git
 kind: ConfigMap
 metadata:
   annotations: {}
