@@ -301,7 +301,7 @@ spec:
       containers:
       - args:
         - -config.file=/etc/loki/config.yml
-        image: grafana/loki:2.1.0
+        image: gcr.io/devtest-293809/loki:2.1.0
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -384,7 +384,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: spec.nodeName
-        image: grafana/promtail:2.1.0
+        image: gcr.io/devtest-293809/promtail:2.1.0
         imagePullPolicy: IfNotPresent
         name: promtail
         ports:
