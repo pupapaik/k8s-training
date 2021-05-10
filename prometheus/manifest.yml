@@ -7,14 +7,14 @@ metadata:
       argocd.argoproj.io/hook: Skip
   name: prometheus
 ---
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  labels:
-    app.kubernetes.io/name: kube-state-metrics
-    app.kubernetes.io/version: 2.0.0-beta
-  name: kube-state-metrics
-  namespace: prometheus
+#apiVersion: v1
+#kind: ServiceAccount
+#metadata:
+#  labels:
+#    app.kubernetes.io/name: kube-state-metrics
+#    app.kubernetes.io/version: 2.0.0-beta
+#  name: kube-state-metrics
+#  namespace: prometheus
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -22,68 +22,68 @@ metadata:
   name: prometheus
   namespace: prometheus
 ---
-apiVersion: v1
-data:
-  config.yml: "global:\n  #smtp_smarthost: 'mail'\n  smtp_from: 'alertmanager@6shore.net'\n\nroute:\n
-    \ # The root route must not have any matchers as it is the entry point for\n  #
-    all alerts. It needs to have a receiver configured so alerts that do not\n  #
-    match any of the sub-routes are sent to someone.\n  receiver: telegram\n\n  #
-    The labels by which incoming alerts are grouped together. For example,\n  # multiple
-    alerts coming in for cluster=A and alertname=LatencyHigh would\n  # be batched
-    into a single group.\n  #\n  # To aggregate by all possible labels use '...' as
-    the sole label name. \n  # This effectively disables aggregation entirely, passing
-    through all \n  # alerts as-is. This is unlikely to be what you want, unless you
-    have \n  # a very low alert volume or your upstream notification system performs
-    \n  # its own grouping. Example: group_by: [...]\n  group_by: ['instance']\n\n
-    \ # When a new group of alerts is created by an incoming alert, wait at\n  # least
-    'group_wait' to send the initial notification.\n  # This way ensures that you
-    get multiple alerts for the same group that start\n  # firing shortly after another
-    are batched together on the first\n  # notification.\n  group_wait: 30s\n\n  #
-    When the first notification was sent, wait 'group_interval' to send a batch\n
-    \ # of new alerts that started firing for that group.\n  group_interval: 5m\n\n
-    \ # If an alert has successfully been sent, wait 'repeat_interval' to\n  # resend
-    them.\n  repeat_interval: 3h\n\n  # All the above attributes are inherited by
-    all child routes and can\n  # overwritten on each.\n  \n  routes:\n  - receiver:
-    telegram\n    match_re:\n      severity: critical\n\n# Inhibition rules allow
-    to mute a set of alerts given that another alert is\n# firing.\n# We use this
-    to mute any warning-level notifications if the same alert is\n# already critical.\n#inhibit_rules:\n#-
-    source_match:\n#    severity: 'critical'\n#  target_match:\n#    severity: 'warning'\n#
-    \ # Apply inhibition if the alertname is the same.\n#  equal: ['alertname']\n#\n\nreceivers:\n-
-    name: blackhole\n- name: telegram\n  webhook_configs:\n  - send_resolved: true\n
-    \   url: 'http://telegram-bot'\n"
-kind: ConfigMap
-metadata:
-  labels:
-    generator: kustomize
-  name: alertmanager-config-dtm96b7bhb
-  namespace: prometheus
+#apiVersion: v1
+#data:
+#  config.yml: "global:\n  #smtp_smarthost: 'mail'\n  smtp_from: 'alertmanager@6shore.net'\n\nroute:\n
+#    \ # The root route must not have any matchers as it is the entry point for\n  #
+#    all alerts. It needs to have a receiver configured so alerts that do not\n  #
+#    match any of the sub-routes are sent to someone.\n  receiver: telegram\n\n  #
+#    The labels by which incoming alerts are grouped together. For example,\n  # multiple
+#    alerts coming in for cluster=A and alertname=LatencyHigh would\n  # be batched
+#    into a single group.\n  #\n  # To aggregate by all possible labels use '...' as
+#    the sole label name. \n  # This effectively disables aggregation entirely, passing
+#    through all \n  # alerts as-is. This is unlikely to be what you want, unless you
+#    have \n  # a very low alert volume or your upstream notification system performs
+#    \n  # its own grouping. Example: group_by: [...]\n  group_by: ['instance']\n\n
+#    \ # When a new group of alerts is created by an incoming alert, wait at\n  # least
+#    'group_wait' to send the initial notification.\n  # This way ensures that you
+#    get multiple alerts for the same group that start\n  # firing shortly after another
+#    are batched together on the first\n  # notification.\n  group_wait: 30s\n\n  #
+#    When the first notification was sent, wait 'group_interval' to send a batch\n
+#    \ # of new alerts that started firing for that group.\n  group_interval: 5m\n\n
+#    \ # If an alert has successfully been sent, wait 'repeat_interval' to\n  # resend
+#    them.\n  repeat_interval: 3h\n\n  # All the above attributes are inherited by
+#    all child routes and can\n  # overwritten on each.\n  \n  routes:\n  - receiver:
+#    telegram\n    match_re:\n      severity: critical\n\n# Inhibition rules allow
+#    to mute a set of alerts given that another alert is\n# firing.\n# We use this
+#    to mute any warning-level notifications if the same alert is\n# already critical.\n#inhibit_rules:\n#-
+#    source_match:\n#    severity: 'critical'\n#  target_match:\n#    severity: 'warning'\n#
+#    \ # Apply inhibition if the alertname is the same.\n#  equal: ['alertname']\n#\n\nreceivers:\n-
+#    name: blackhole\n- name: telegram\n  webhook_configs:\n  - send_resolved: true\n
+#    \   url: 'http://telegram-bot'\n"
+#kind: ConfigMap
+#metadata:
+#  labels:
+#    generator: kustomize
+#  name: alertmanager-config-dtm96b7bhb
+#  namespace: prometheus
 ---
-apiVersion: v1
-data:
-  config.yml: |
-    modules:
-      http_2xx:
-        prober: http
-      http_post_2xx:
-        prober: http
-        http:
-          method: POST
-      http_2xx_webcam:
-        prober: http
-        http:
-          valid_status_codes: [200,301]
-          method: GET
-          basic_auth:
-            username: openwrt
-            password: cinta
-      icmp:
-        prober: icmp
-kind: ConfigMap
-metadata:
-  labels:
-    generator: kustomize
-  name: be-config-458td64m48
-  namespace: prometheus
+#apiVersion: v1
+#data:
+#  config.yml: |
+#    modules:
+#      http_2xx:
+#        prober: http
+#      http_post_2xx:
+#        prober: http
+#        http:
+#          method: POST
+#      http_2xx_webcam:
+#        prober: http
+#        http:
+#          valid_status_codes: [200,301]
+#          method: GET
+#          basic_auth:
+#            username: openwrt
+#            password: cinta
+#      icmp:
+#        prober: icmp
+#kind: ConfigMap
+#metadata:
+#  labels:
+#    generator: kustomize
+#  name: be-config-458td64m48
+#  namespace: prometheus
 ---
 apiVersion: v1
 data:
