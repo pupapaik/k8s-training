@@ -3,6 +3,8 @@ kind: ClusterRole
 metadata:
   labels:
     app: promtail
+  annotations:
+      argocd.argoproj.io/hook: Skip
   name: promtail-clusterrole
 rules:
 - apiGroups:
@@ -23,6 +25,8 @@ kind: ClusterRoleBinding
 metadata:
   labels:
     app: promtail
+  annotations:
+      argocd.argoproj.io/hook: Skip
   name: promtail-clusterrolebinding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
