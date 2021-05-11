@@ -2681,8 +2681,6 @@ spec:
           name: ssh-known-hosts
         - mountPath: /app/config/tls
           name: tls-certs
-        - mountPath: /app/config/gpg/source
-          name: gpg-keys
         - mountPath: /app/config/gpg/keys
           name: gpg-keyring
       volumes:
@@ -2692,9 +2690,6 @@ spec:
       - configMap:
           name: argocd-tls-certs-cm
         name: tls-certs
-      - configMap:
-          name: argocd-gpg-keys-cm
-        name: gpg-keys
       - emptyDir: {}
         name: gpg-keyring
 ---
