@@ -132,7 +132,7 @@ data:
     auto_assign_org_role = Editor
 
     [auth.proxy]
-    enabled = true
+    enabled = false
     header_name = X-WEBAUTH-USER
     header_property = username
     auto_sign_up = true
